@@ -1,0 +1,27 @@
+Spring + Mybatis 整合：
+
+1、添加jar包
+2、创建实体类
+3、创建实体类对应的mapper接口（interface）
+4、创建对应的mapper的xml配置文件，其中namespace必须指定到具体实体类对应的mapper接口
+    <mappers namespace="com.yanglies.springmybatis.mapper.CateogryMapper"></mappers>
+5、新建Spring配置文件：applicationContext.xml
+    ①、开启注解 ：<context:annotation-config />
+    ②、配置数据源：id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+    ③、扫描mapper配置文件
+        <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+            <property name="typeAliasesPackage" value="com.yanglies.springmybatis.pojo"/>
+            <property name="dataSource" ref="dataSource"/>
+            <property name="mapperLocations"
+                      value="classpath:com/yanglies/springmybatis/mapper/*.xml"/>
+        </bean>
+    ④、扫描mapper类
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+            <property name="basePackage" value="com.yanglies.springmybatis.mapper"/>
+        </bean>
+6、Test
+    ①、@RunWith(SpringJUnit4ClassRunner.class);
+    ②、@ContextConfiguration("classpath:applicationContext.xml")
+
+    流程：通过Spring注解的方式，注入Mapper,当调用Mapper中的指定方法时，
+         会自动去调用mapper对应xml配置文件中对应id(与调用方法同名)中的SQL语句，从而执行SQL语句。
