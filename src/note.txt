@@ -1,4 +1,4 @@
-Spring + Mybatis 整合：
+﻿Spring + Mybatis 整合：
 
 1、添加jar包
 2、创建实体类
@@ -25,3 +25,5 @@ Spring + Mybatis 整合：
 
     流程：通过Spring注解的方式，注入Mapper,当调用Mapper中的指定方法时，
          会自动去调用mapper对应xml配置文件中对应id(与调用方法同名)中的SQL语句，从而执行SQL语句。
+
+7、
